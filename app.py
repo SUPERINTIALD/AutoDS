@@ -1,11 +1,16 @@
-from langchain import OpenAI
+from langchain_openai import ChatOpenAI
 from langchain.agents import initialize_agent, Tool
 from langchain.prompts import PromptTemplate
+from langchain.memory import ConversationBufferMemory
 
-# Step 1: Initialize the LLM
-llm = OpenAI(temperature=0.7, model_name="gpt-3.5-turbo", openai_api_key="your-openai-api-key")
+# Step 1: Initialize LangChain Agent
+llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.7)
 
-# Step 2: Define a tool
+# Step 2: Add Memory
+# Retain only the last 3 interactions
+memory = ConversationBufferMemory(k=3)
+
+# Step 3: Define a tool
 # Tools define what actions the agent can perform.
 def llm_query_tool(input_text: str) -> str:
     """A simple tool that queries the LLM."""
@@ -18,16 +23,17 @@ query_tool = Tool(
     description="Use this tool to query the LLM with any question or prompt."
 )
 
-# Step 3: Initialize the Agent
-# The agent will use the defined tool to perform tasks.
+# Step 4: Initialize the Agent
 agent = initialize_agent(
     tools=[query_tool],
     llm=llm,
     agent="zero-shot-react-description",
-    verbose=True
+    verbose=True,
+    max_iteration=5,
+    memory=memory  # Add memory for truncation
 )
 
-# Step 4: Use the Agent
+# Step 5: Use the Agent
 if __name__ == "__main__":
     print("Welcome to the LangChain LLM Agent!")
     while True:
