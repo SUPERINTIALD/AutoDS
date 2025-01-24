@@ -1,0 +1,47 @@
+# ----------------------------------------------------------------------------------
+# .gitignore File
+# ----------------------------------------------------------------------------------
+
+# > Add: Environment-specific files (e.g., .env), temporary files, or local tools (e.g., venv/, .vscode/).
+# > Remove: Only if the file needs to be shared with the team; re-add using `git add <file>`.
+# > Troubleshooting: If ignored files are still tracked, run `git rm -r --cached .` and commit.
+# > Review periodically to keep the ignore list relevant and clean.
+
+# Ignore virtual environment
+venv/
+
+# Ignore environment variable files
+.env
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore log files
+*.log
+
+# Ignore Jupyter Notebook checkpoints (if using Jupyter)
+.ipynb_checkpoints/
+
+# Ignore OS-specific files
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# Ignore IDE/editor files
+.vscode/
+.vscode/.history/
+.history/
+.idea/
+*.swp
+*.swo
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+
+# Ignore dependency files (optional if using a lock file)
+*.lock
+
+# Ignore unnecessary system files
+*.bak
+*.tmp
